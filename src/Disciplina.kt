@@ -1,8 +1,10 @@
 import tipoDisciplina
 data class Disciplina(
-    val nombre: String,
-    val tipo: tipoDisciplina,
+    var nombre: String,
+    var tipo: tipoDisciplina,
     val id: Int,
-    val capacidadMaxima: Int,
-    val sociosInscriptos: MutableList<Socio> = mutableListOf()
-)
+    var capacidadMaxima: Int,
+    var sociosInscriptos: MutableList<Socio> = mutableListOf()
+) {
+
+}

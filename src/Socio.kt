@@ -1,10 +1,10 @@
 class Socio (
-    val nombre: String,
+    var nombre: String,
     val DNI: Int,
-    val email: String?,
+    var email: String?,
     val id: Int,
-    val listaDeInscripciones: MutableList<Inscripcion> = mutableListOf(),
-    val pagos: MutableList<Pago> = mutableListOf()
+    var listaDeInscripciones: MutableList<Inscripcion> = mutableListOf(),
+    var pagos: MutableList<Pago> = mutableListOf()
 ) {
 
 }

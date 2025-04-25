@@ -7,4 +7,6 @@ class Inscripcion(
     val disciplina: Disciplina,
     val fecha: LocalDate,
     var EstadoInscripcion: Estado
-)
+) {
+
+}
