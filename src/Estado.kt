@@ -1,3 +1,3 @@
 enum class Estado {
-    EQUIPO, INDIVIDUAL
+    ACTIVA, CANCELADA, FINALIZADA
 }
