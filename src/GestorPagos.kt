@@ -1,5 +1,4 @@
 import java.time.LocalDate
-import Pago
 
 class GestorPagos {
     private val pagos = mutableListOf<Pago>()

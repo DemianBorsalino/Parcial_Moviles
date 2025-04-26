@@ -2,8 +2,9 @@ import Estado
 import Socio
 import java.time.LocalDate
 
-class GestorInscripciones {
+class GestorInscripciones : GeneradorID{
     private val inscripciones = mutableListOf<Inscripcion>()
+    private var idCounter : Int = 0
 
     fun inscribirSocio(socio: Socio, disciplina: Disciplina) {
         if (socio.tieneCuotasImpagas()) {
@@ -17,11 +18,11 @@ class GestorInscripciones {
         }
 
         val nuevaInscripcion = Inscripcion(
-            id = generarId(),
+            id = generoID(),
             socio = socio,
             disciplina = disciplina,
             fecha = LocalDate.now(),
-            EstadoInscripcion = Estado.ACTIVO
+            EstadoInscripcion = Estado.ACTIVA
         )
         inscripciones.add(nuevaInscripcion)
         socio.listaDeInscripciones.add(nuevaInscripcion)
@@ -42,7 +43,9 @@ class GestorInscripciones {
         println("Inscripción finalizada.")
     }
 
-    private fun generarId(): Int {
-        return inscripciones.size + 1
+
+    override fun generoID() : Int {
+        idCounter ++
+        return idCounter
     }
 }

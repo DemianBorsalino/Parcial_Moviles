@@ -12,28 +12,47 @@
 
             when (readLine()?.toIntOrNull()) {
                 1 -> agregarDisciplina()
-                2 -> buscarDisciplina()
-                3 -> gestorDisciplinas.mostrarDisciplinas()
+                2 -> eliminarDisciplina()
+                3 -> buscarDisciplina()
+                4 -> gestorDisciplinas.mostrarDisciplinas()
                 0 -> println("Saliendo...")
                 else -> println("Opción inválida")
             }
         }
 
-    private fun agregarDisciplina() {
-        println("Ingrese nombre:")
-        val nombre = readLine() ?: return
-        println("Ingrese tipo (EQUIPO o INDIVIDUAL):")
-        val tipoInput = readLine() ?: return
-        val tipo = tipoDisciplina.valueOf(tipoInput.uppercase())
+        private fun agregarDisciplina() {
+            println("Ingrese nombre de la disciplina:")
+            val nombre = readLine() ?: return
 
-        println("Ingrese capacidad máxima:")
-        val capacidad = readLine()?.toIntOrNull() ?: return
+            println("Ingrese tipo de disciplina (EQUIPO o INDIVIDUAL):")
+            val tipoInput = readLine() ?: return
+            val tipo = tipoDisciplina.valueOf(tipoInput.uppercase())
 
-        val nuevaDisciplina = Disciplina(nombre, tipo, (0..9999).random(), capacidad)
-        gestorDisciplinas.alta(nuevaDisciplina)
-    }
+            println("Ingrese capacidad máxima:")
+            val capacidad = readLine()?.toIntOrNull() ?: return
 
-    private fun buscarDisciplina() {
+            val nuevaDisciplina = Disciplina(
+                nombre = nombre,
+                tipo = tipo,
+                id = gestorDisciplinas.generoID(),
+                capacidadMaxima = capacidad
+            )
+
+            gestorDisciplinas.alta(nuevaDisciplina)
+        }
+
+        private fun eliminarDisciplina() {
+            val id = getInputIntOrExit("Ingrese el ID de la Disciplina que desea eliminar (o 0 para volver atrás):")
+
+            if (id == null) {
+                println("Volviendo al menú...")
+                return
+            }
+
+            gestorDisciplinas.baja(id)
+        }
+
+        private fun buscarDisciplina() {
         println("Ingrese dato para buscar:")
         val dato = readLine() ?: return
 
@@ -48,9 +67,30 @@
         }
 
         if (resultado != null) {
-            println("Disciplina encontrada: ${resultado.nombre}")
+            println("Disciplina encontrada: ${resultado.nombre}, ${resultado.id}")
         } else {
             println("No se encontró disciplina.")
         }
+
+
     }
+        fun getInputIntOrExit(message: String): Int? {
+            println(message)
+            val input = readLine()
+
+            val valor = input?.toIntOrNull()
+
+            if (valor == null) {
+                println("Entrada no válida. Por favor ingrese un número.")
+                return getInputIntOrExit(message)
+            }
+
+            if (valor == 0) {
+                return null // El usuario eligió salir
+            }
+
+            return valor
+        }
+
+
 }

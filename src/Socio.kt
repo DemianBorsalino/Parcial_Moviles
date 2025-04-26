@@ -8,7 +8,7 @@ class Socio (
     var pagos: MutableList<Pago> = mutableListOf()
 ) {
     fun tieneCuotasImpagas(): Boolean {
-        val inscripcionesActivas = listaDeInscripciones.filter { it.EstadoInscripcion == Estado.ACTIVO }
+        val inscripcionesActivas = listaDeInscripciones.filter { it.EstadoInscripcion == Estado.ACTIVA }
         return inscripcionesActivas.any { inscripcion ->
             pagos.none { pago ->
                 pago.concepto.contains(inscripcion.disciplina.nombre, ignoreCase = true)
@@ -17,6 +17,6 @@ class Socio (
     }
 
     fun estaInscriptoActiva(disciplina: Disciplina): Boolean {
-        return listaDeInscripciones.any { it.disciplina == disciplina && it.EstadoInscripcion == Estado.ACTIVO }
+        return listaDeInscripciones.any { it.disciplina == disciplina && it.EstadoInscripcion == Estado.ACTIVA }
     }
 }

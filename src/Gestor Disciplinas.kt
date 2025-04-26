@@ -1,7 +1,8 @@
 import tipoDisciplina
 import Disciplina
-class GestorDisciplinas : Gestiones<Disciplina> {
+class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
     private val disciplinas = mutableListOf<Disciplina>()
+    private var idCounter: Int = 10
 
     override fun alta(item: Disciplina) {
         disciplinas.add(item)
@@ -32,5 +33,10 @@ class GestorDisciplinas : Gestiones<Disciplina> {
         disciplinas.forEach {
             println("Disciplina: ${it.nombre}, Tipo: ${it.tipo}, Capacidad: ${it.capacidadMaxima}")
         }
+    }
+
+    override fun generoID(): Int {
+        idCounter ++
+        return idCounter
     }
 }
