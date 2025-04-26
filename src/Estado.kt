@@ -1,3 +1,3 @@
 enum class Estado {
-    ACTIVA, CANCELADA, FINALIZADA
+    ACTIVO, CANCELADA, FINALIZADA
 }
