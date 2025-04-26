@@ -14,7 +14,7 @@ class GestorSocios : Gestiones<Socio> {
         }
     }
 
-    override fun buscar(id: Int): Socio? {
+    fun buscar(id: Int): Socio? {
         return socios.find { it.id == id }
     }
 }

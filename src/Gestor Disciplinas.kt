@@ -16,7 +16,7 @@ class GestorDisciplinas : Gestiones<Disciplina> {
             disciplinas.remove(d)
             println("Disciplina '${d.nombre}' eliminada.")
         } else {
-            println("No se puede eliminar la disciplina.")
+            println("No se ha encontrado la disciplina.")
         }
     }
 
