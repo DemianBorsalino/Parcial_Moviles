@@ -3,18 +3,21 @@ import java.time.LocalDate
 class GestorPagos {
     private val pagos = mutableListOf<Pago>()
 
-    fun registrarPago(socio: Socio, importe: Double, concepto: String) {
+    fun registrarPago(socio: Socio, importeOriginal: Double, concepto: String, disciplina: Disciplina) {
+        val descuentoAplicado = importeOriginal * (disciplina.descuento / 100)
+        val importeFinal = importeOriginal - descuentoAplicado
+
         val nuevoPago = Pago(
             id = generarId(),
             socio = socio,
-            importe = importe,
+            importe = importeFinal,
             fecha = LocalDate.now(),
             concepto = concepto
         )
         pagos.add(nuevoPago)
         socio.pagos.add(nuevoPago)
 
-        println("Pago registrado para ${socio.nombre}: $$importe - $concepto")
+        println("Pago registrado para ${socio.nombre}: $$importeFinal (${disciplina.descuento}% de descuento aplicado) - $concepto")
     }
 
     fun consultarPagosPorSocio(socio: Socio): List<Pago> {
@@ -25,6 +28,13 @@ class GestorPagos {
         return pagos.filter { pago ->
             pago.socio.listaDeInscripciones.any { it.disciplina == disciplina }
         }
+    }
+
+    fun recaudacionPorDisciplina(disciplina: Disciplina): Double {
+        val pagosDeLaDisciplina = consultarPagosPorDisciplina(disciplina)
+        val total = pagosDeLaDisciplina.sumOf { it.importe }
+        println("Recaudación total para ${disciplina.nombre}: $$total")
+        return total
     }
 
     private fun generarId(): Int {

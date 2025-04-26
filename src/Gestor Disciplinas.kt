@@ -20,6 +20,49 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
         }
     }
 
+    fun listarSociosPorDisciplina() {
+        disciplinas.forEach { disciplina ->
+            println("Disciplina: ${disciplina.nombre}")
+            if (disciplina.sociosInscriptos.isEmpty()) {
+                println("  No hay socios inscriptos.")
+            } else {
+                disciplina.sociosInscriptos.forEach { socio ->
+                    println("  Socio: ${socio.nombre} (DNI: ${socio.DNI})")
+                }
+            }
+        }
+    }
+
+    fun cantidadDeSociosPorDisciplina() {
+        disciplinas.forEach { disciplina ->
+            println("Disciplina: ${disciplina.nombre} - Socios inscriptos: ${disciplina.sociosInscriptos.size}/${disciplina.capacidadMaxima}")
+        }
+    }
+
+    fun disciplinasConCupoCompleto() {
+        val completas = disciplinas.filter { it.sociosInscriptos.size >= it.capacidadMaxima }
+        if (completas.isEmpty()) {
+            println("No hay disciplinas con cupo completo.")
+        } else {
+            println("Disciplinas con cupo completo:")
+            completas.forEach {
+                println("  ${it.nombre}")
+            }
+        }
+    }
+
+    fun disciplinasSinInscriptos() {
+        val vacias = disciplinas.filter { it.sociosInscriptos.isEmpty() }
+        if (vacias.isEmpty()) {
+            println("Todas las disciplinas tienen al menos un socio.")
+        } else {
+            println("Disciplinas sin inscriptos:")
+            vacias.forEach {
+                println("  ${it.nombre}")
+            }
+        }
+    }
+
     fun buscarDisciplina(dato: Any): Disciplina? {
         return disciplinas.find {
             when (dato) {

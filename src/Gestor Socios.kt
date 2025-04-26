@@ -14,6 +14,18 @@ class GestorSocios : Gestiones<Socio> {
         }
     }
 
+    fun mostrarMorosos() {
+        val morosos = socios.filter { it.tieneCuotasImpagas() }
+        if (morosos.isEmpty()) {
+            println("No hay socios morosos.")
+        } else {
+            println("Socios con cuotas impagas:")
+            morosos.forEach {
+                println("  ${it.nombre} (DNI: ${it.DNI})")
+            }
+        }
+    }
+
     fun buscar(id: Int): Socio? {
         return socios.find { it.id == id }
     }
