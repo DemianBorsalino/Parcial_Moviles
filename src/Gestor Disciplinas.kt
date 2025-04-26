@@ -1,6 +1,5 @@
 import tipoDisciplina
 import Disciplina
-
 class GestorDisciplinas : Gestiones<Disciplina> {
     private val disciplinas = mutableListOf<Disciplina>()
 
