@@ -89,4 +89,7 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
         idCounter ++
         return idCounter
     }
+    fun buscarDisciplinaPorId(id: Int): Disciplina? {
+        return disciplinas.find { it.id == id }
+    }
 }

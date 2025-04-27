@@ -40,4 +40,7 @@ class GestorPagos {
     private fun generarId(): Int {
         return pagos.size + 1
     }
+    fun consultarTodosLosPagos(): List<Pago> {
+        return pagos
+    }
 }
