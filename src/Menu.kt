@@ -61,24 +61,30 @@
         }
 
         fun menuPrincipal() {
-            do {
-                println("Bienvenido al sistema de gestion")
-                println("Que desa gestionar?:")
-                println("1. Disciplinas")
-                println("2. Socios")
-                println("3. Pagos")
-                println("4. Inscripciones")
-                println("0. Salir")
+            println("Bienvenido al sistema de gestion")
+            println("Que desa gestionar?:")
+            println("1. Disciplinas")
+            println("2. Socios")
+            println("3. Pagos")
+            println("4. Inscripciones")
+            println("0. Salir")
+
+            when (readLine()?.toIntOrNull()) {
+                1 -> menuDisciplinas()
+                /*
 
 
-                when (readLine()?.toIntOrNull()) {
-                    1 -> menuDisciplinas()
-                    /*2 -> menuSocios()
-                    3 -> menuPagos()
-                    4 -> menuInscrpiciones()*/
-                    0 -> println("Adios! Vuelva pronto!")
-                    else -> println("Opción inválida")
-                }
+
+                2 -> menuSocios()
+
+
+
+
+                */
+                3 -> menuPagos()
+                4 -> menuInscripciones()
+                0 -> println("Adios! Vuelva pronto!")
+                else -> println("Opción inválida")
             }
         }
 
@@ -100,16 +106,216 @@
                 else -> println("Opción inválida")
             }
         }
+/*
+
 
         fun menuSocios() {
             println("Socios man")
         }
 
+
+
+ */
         fun menuPagos() {
-            println("Pagos para hacer")
+            println("Seleccionaste gestión de pagos")
+            println("Ahora, elige una opción:")
+            println("1. Registrar nuevo pago")
+            println("2. Consultar pagos de un socio")
+            println("3. Consultar recaudación por disciplina")
+            println("4. Mostrar todos los pagos")
+            println("0. Salir")
+
+            when (readLine()?.toIntOrNull()) {
+                1 -> registrarNuevoPago()
+                2 -> consultarPagosDeSocio()
+                3 -> consultarRecaudacionPorDisciplina()
+                4 -> mostrarTodosLosPagos()
+                0 -> println("Adiós! Volviendo al menú principal.")
+                else -> println("Opción inválida")
+            }
+        }
+
+        private fun registrarNuevoPago() {
+            println("Ingrese el ID del socio:")
+            val idSocio = readLine()?.toIntOrNull() ?: run {
+                println("ID inválido.")
+                return
+            }
+
+            val socio = gestorSocios.buscar(idSocio)
+            if (socio == null) {
+                println("Socio no encontrado.")
+                return
+            }
+
+            println("Ingrese el importe original:")
+            val importeOriginal = readLine()?.toDoubleOrNull() ?: run {
+                println("Importe inválido.")
+                return
+            }
+
+            println("Ingrese el concepto del pago:")
+            val concepto = readLine() ?: return
+
+            println("Ingrese el Nombre de la disciplina:")
+            val nombreDisciplina = readLine()?: run {
+                println("Nombre de disciplina inválido.")
+                return
+            }
+
+            val disciplina = gestorDisciplinas.buscarDisciplina(nombreDisciplina)
+            if (disciplina == null) {
+                println("Disciplina no encontrada.")
+                return
+            }
+
+            /*val disciplina = gestorDisciplinas.buscarDisciplinaPorId(3)
+            if (disciplina != null) {
+                println("Disciplina encontrada: ${disciplina.nombre}")
+            } else {
+                println("No se encontró la disciplina con ese ID.")
+            }*/
+
+
+            gestorPagos.registrarPago(socio, importeOriginal, concepto, disciplina)
+        }
+
+        private fun consultarPagosDeSocio() {
+            println("Ingrese el ID del socio:")
+            val idSocio = readLine()?.toIntOrNull() ?: run {
+                println("ID inválido.")
+                return
+            }
+
+            val socio = gestorSocios.buscar(idSocio)
+            if (socio == null) {
+                println("Socio no encontrado.")
+                return
+            }
+
+            val pagos = gestorPagos.consultarPagosPorSocio(socio)
+            if (pagos.isEmpty()) {
+                println("El socio no tiene pagos registrados.")
+            } else {
+                println("Pagos de ${socio.nombre}:")
+                pagos.forEach { pago ->
+                    println("ID: ${pago.id}, Importe: $${pago.importe}, Fecha: ${pago.fecha}, Concepto: ${pago.concepto}")
+                }
+            }
+        }
+
+        private fun consultarRecaudacionPorDisciplina() {
+            println("Ingrese el Nombre de la disciplina:")
+            val nombreDisciplina = readLine()?: run {
+                println("Nombre de disciplina inválido.")
+                return
+            }
+
+            val disciplina = gestorDisciplinas.buscarDisciplina(nombreDisciplina)
+            if (disciplina == null) {
+                println("Disciplina no encontrada.")
+                return
+            }
+
+            gestorPagos.recaudacionPorDisciplina(disciplina)
+        }
+
+        private fun mostrarTodosLosPagos() {
+            val todosLosPagos = gestorPagos.consultarTodosLosPagos()
+            if (todosLosPagos.isEmpty()) {
+                println("No hay pagos registrados.")
+            } else {
+                println("Listado de todos los pagos:")
+                todosLosPagos.forEach { pago ->
+                    println("ID: ${pago.id}, Socio: ${pago.socio.nombre}, Importe: $${pago.importe}, Fecha: ${pago.fecha}, Concepto: ${pago.concepto}")
+                }
+            }
         }
         fun menuInscripciones() {
-            println("Inscripciones aiuda")
+            println("=== Gestión de Inscripciones ===")
+            println("Seleccione una opción:")
+            println("1. Inscribir socio a disciplina")
+            println("2. Eliminar inscripción de socio")
+            println("3. Ver socios inscriptos en una disciplina")
+            println("0. Volver")
+
+            when (readLine()?.toIntOrNull()) {
+                1 -> inscribirSocioADisciplina()
+                2 -> eliminarInscripcion()
+                3 -> verSociosInscriptos()
+                0 -> println("Volviendo al menú principal...")
+                else -> println("Opción inválida")
+            }
+        }
+
+        private fun inscribirSocioADisciplina() {
+            println("Ingrese el ID del socio:")
+            val socioId = readLine()?.toIntOrNull() ?: return
+
+            println("Ingrese el ID de la disciplina:")
+            val disciplinaId = readLine()?.toIntOrNull() ?: return
+
+            val socio = gestorSocios.buscar(socioId)
+            val disciplina = gestorDisciplinas.buscarDisciplinaPorId(disciplinaId)
+
+            if (socio == null || disciplina == null) {
+                println("Socio o Disciplina no encontrados.")
+                return
+            }
+
+            try {
+                gestorInscripciones.inscribirSocio(socio, disciplina)
+                //println("Socio ${socio.nombre} inscripto en ${disciplina.nombre} correctamente.")
+            } catch (e: Exception) {
+                println("Error al inscribir: ${e.message}")
+            }
+        }
+        private fun eliminarInscripcion() {
+            println("Ingrese el ID del socio:")
+            val socioId = readLine()?.toIntOrNull() ?: return
+
+            println("Ingrese el ID de la disciplina:")
+            val disciplinaId = readLine()?.toIntOrNull() ?: return
+
+            val socio = gestorSocios.buscar(socioId)
+            val disciplina = gestorDisciplinas.buscarDisciplinaPorId(disciplinaId)
+
+            if (socio == null || disciplina == null) {
+                println("Socio o Disciplina no encontrados.")
+                return
+            }
+
+            val inscripcion = socio.listaDeInscripciones.find {
+                it.disciplina.id == disciplina.id && it.EstadoInscripcion == Estado.ACTIVA
+            }
+
+            if (inscripcion == null) {
+                println("El socio no tiene una inscripción activa en esta disciplina.")
+                return
+            }
+
+            gestorInscripciones.cancelarInscripcion(inscripcion)
+            println("Inscripción cancelada correctamente.")
+        }
+        private fun verSociosInscriptos() {
+            println("Ingrese el ID de la disciplina:")
+            val disciplinaId = readLine()?.toIntOrNull() ?: return
+
+            val disciplina = gestorDisciplinas.buscarDisciplinaPorId(disciplinaId)
+
+            if (disciplina == null) {
+                println("Disciplina no encontrada.")
+                return
+            }
+
+            println("Socios inscriptos en ${disciplina.nombre}:")
+            if (disciplina.sociosInscriptos.isEmpty()) {
+                println("No hay socios inscriptos.")
+            } else {
+                disciplina.sociosInscriptos.forEach { socio ->
+                    println("- ${socio.nombre} (DNI: ${socio.DNI})")
+                }
+            }
         }
 
 

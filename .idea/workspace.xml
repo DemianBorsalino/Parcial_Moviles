@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca6d331a-2112-4760-a54b-444b99cb6a5b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Estado.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estado.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Gestor Disciplinas.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestor Disciplinas.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Inscripcion a diciplinas.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inscripcion a diciplinas.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pagos.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pagos.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Socio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socio.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2wGnyYLcB4eBJY6pfgH95mcI8jz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Desarrollo&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ParcialMoviles/Parcial_Moviles&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca6d331a-2112-4760-a54b-444b99cb6a5b" name="Changes" comment="" />
+      <created>1745677033259</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745677033259</updated>
+    </task>
+    <servers />
+  </component>
+</project>
