@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca6d331a-2112-4760-a54b-444b99cb6a5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Estado.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estado.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Gestor Disciplinas.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Gestor Disciplinas.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inscripcion a diciplinas.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inscripcion a diciplinas.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pagos.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pagos.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Socio.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Socio.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Menu.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Menu.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,15 +33,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Desarrollo&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ParcialMoviles/Parcial_Moviles&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Kotlin.MainKt.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "desarrollo",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/ParcialMoviles/Parcial_Moviles"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

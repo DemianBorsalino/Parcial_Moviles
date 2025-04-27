@@ -4,7 +4,7 @@ import Inscripcion
 import Pago
 fun main() {
     val Actividad = Menu()
-    Actividad.BaseDatos()
+    Actividad.baseDatos()
     Actividad.menuPrincipal() // */
 
     /*val gestorSocios = GestorSocios()

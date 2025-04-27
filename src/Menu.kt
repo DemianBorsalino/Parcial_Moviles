@@ -4,7 +4,7 @@
         val gestorInscripciones = GestorInscripciones()
         val gestorPagos = GestorPagos()
 
-        fun BaseDatos() {
+        fun baseDatos() {
             // Crear socios
             val socio1 = Socio("Ana López", 12345678, "ana@example.com", id = 1)
             val socio2 = Socio("Bruno Díaz", 87654321, null, id = 2)
@@ -61,31 +61,36 @@
         }
 
         fun menuPrincipal() {
-            println("Bienvenido al sistema de gestion")
-            println("Que desa gestionar?:")
-            println("1. Disciplinas")
-            println("2. Socios")
-            println("3. Pagos")
-            println("4. Inscripciones")
-            println("0. Salir")
+            var opcion: Int?
 
-            when (readLine()?.toIntOrNull()) {
-                1 -> menuDisciplinas()
-                /*
+            do {
+                println("\nBienvenido al sistema de gestión")
+                println("¿Qué desea gestionar?:")
+                println("1. Disciplinas")
+                println("2. Socios")
+                println("3. Pagos")
+                println("4. Inscripciones")
+                println("0. Salir")
 
+                opcion = readLine()?.toIntOrNull()
 
-
-                2 -> menuSocios()
-
-
+                when (opcion) {
+                    1 -> menuDisciplinas()
 
 
-                */
-                3 -> menuPagos()
-                4 -> menuInscripciones()
-                0 -> println("Adios! Vuelva pronto!")
-                else -> println("Opción inválida")
-            }
+
+
+                    2 -> menuSocios()
+
+
+
+
+                    3 -> menuPagos()
+                    4 -> menuInscripciones()
+                    0 -> println("Adios! Vuelva pronto!")
+                    else -> println("Opción inválida")
+                }
+            } while (opcion != 0)
         }
 
         fun menuDisciplinas() {
@@ -95,6 +100,11 @@
             println("2. Eliminar disciplina")
             println("3. Buscar disciplina")
             println("4. Mostrar disciplinas")
+            /*println("5. Lista de socios por Disciplina")
+            println("6. Cantidad de Socias Por Disciplina")
+            println("7. Disciplinas Completas")
+            println("8. Disciplinas sin inscriptos")
+           */
             println("0. Salir")
 
             when (readLine()?.toIntOrNull()) {
@@ -102,20 +112,96 @@
                 2 -> eliminarDisciplina()
                 3 -> buscarDisciplina()
                 4 -> gestorDisciplinas.mostrarDisciplinas()
+               /* 5 -> gestorDisciplinas.listarSociosPorDisciplina()
+                6 -> gestorDisciplinas.cantidadDeSociosPorDisciplina()
+                7 -> gestorDisciplinas.disciplinasConCupoCompleto()
+                8 -> gestorDisciplinas.disciplinasSinInscriptos()
+                */
                 0 -> println("Adios! Vuelva pronto!")
                 else -> println("Opción inválida")
             }
         }
-/*
+
+        private fun agregarDisciplina() {
+            println("Ingrese nombre de la disciplina:")
+            val nombre = readLine() ?: return
+
+            var tipo: tipoDisciplina? = null
+            do {
+                println("Ingrese tipo de disciplina (EQUIPO o INDIVIDUAL):")
+                val tipoInput = readLine()
+
+                tipo = try {
+                    tipoInput?.let { tipoDisciplina.valueOf(it.uppercase()) }
+                } catch (e: IllegalArgumentException) {
+                    println("Tipo inválido. Intente de nuevo.")
+                    null
+                }
+            } while (tipo == null)
+
+
+            println("Ingrese capacidad máxima:")
+            val capacidad = readLine()?.toIntOrNull() ?: return
+
+            val nuevaDisciplina = Disciplina(
+                nombre = nombre,
+                tipo = tipo,
+                id = gestorDisciplinas.generoID(),
+                capacidadMaxima = capacidad
+            )
+
+            gestorDisciplinas.alta(nuevaDisciplina)
+        }
+
+        private fun eliminarDisciplina() {
+            do {
+                val id = getInputIntOrExit("Ingrese el ID de la Disciplina que desea eliminar (o 0 para volver atrás):")
+
+                if (id == null) {
+                    println("Volviendo al menú...")
+                    return
+                }
+
+                try {
+                    gestorDisciplinas.baja(id)
+                    break // Si se elimina correctamente, salimos del bucle
+                } catch (e: IdInvalidoException) {
+                    println(e.message)
+                    // sigue el bucle y vuelve a pedir
+                }
+            } while (true)
+        }
+
+        private fun buscarDisciplina() {
+            println("Ingrese dato para buscar:")
+            val dato = readLine() ?: return
+
+            val numero = dato.toIntOrNull()
+
+            val resultado = if (numero != null) {
+                gestorDisciplinas.buscarDisciplina(numero)
+            } else if (dato.equals("EQUIPO", ignoreCase = true) || dato.equals("INDIVIDUAL", ignoreCase = true)) {
+                gestorDisciplinas.buscarDisciplina(tipoDisciplina.valueOf(dato.uppercase()))
+            } else {
+                gestorDisciplinas.buscarDisciplina(dato)
+            }
+
+            if (resultado != null) {
+                println("Disciplina encontrada: ${resultado.nombre}, ${resultado.id}")
+            } else {
+                println("No se encontró disciplina.")
+            }
+
+
+        }
+
+
 
 
         fun menuSocios() {
             println("Socios man")
         }
 
-
-
- */
         fun menuPagos() {
             println("Seleccionaste gestión de pagos")
             println("Ahora, elige una opción:")
@@ -219,7 +305,6 @@
 
             gestorPagos.recaudacionPorDisciplina(disciplina)
         }
-
         private fun mostrarTodosLosPagos() {
             val todosLosPagos = gestorPagos.consultarTodosLosPagos()
             if (todosLosPagos.isEmpty()) {
@@ -231,6 +316,7 @@
                 }
             }
         }
+
         fun menuInscripciones() {
             println("=== Gestión de Inscripciones ===")
             println("Seleccione una opción:")
@@ -247,7 +333,6 @@
                 else -> println("Opción inválida")
             }
         }
-
         private fun inscribirSocioADisciplina() {
             println("Ingrese el ID del socio:")
             val socioId = readLine()?.toIntOrNull() ?: return
@@ -297,6 +382,8 @@
             gestorInscripciones.cancelarInscripcion(inscripcion)
             println("Inscripción cancelada correctamente.")
         }
+
+
         private fun verSociosInscriptos() {
             println("Ingrese el ID de la disciplina:")
             val disciplinaId = readLine()?.toIntOrNull() ?: return
@@ -317,80 +404,6 @@
                 }
             }
         }
-
-
-        private fun agregarDisciplina() {
-            println("Ingrese nombre de la disciplina:")
-            val nombre = readLine() ?: return
-
-            var tipo: tipoDisciplina? = null
-            do {
-                println("Ingrese tipo de disciplina (EQUIPO o INDIVIDUAL):")
-                val tipoInput = readLine()
-
-                tipo = try {
-                    tipoInput?.let { tipoDisciplina.valueOf(it.uppercase()) }
-                } catch (e: IllegalArgumentException) {
-                    println("Tipo inválido. Intente de nuevo.")
-                    null
-                }
-            } while (tipo == null)
-
-
-            println("Ingrese capacidad máxima:")
-            val capacidad = readLine()?.toIntOrNull() ?: return
-
-            val nuevaDisciplina = Disciplina(
-                nombre = nombre,
-                tipo = tipo,
-                id = gestorDisciplinas.generoID(),
-                capacidadMaxima = capacidad
-            )
-
-            gestorDisciplinas.alta(nuevaDisciplina)
-        }
-
-        private fun eliminarDisciplina() {
-            do {
-                val id = getInputIntOrExit("Ingrese el ID de la Disciplina que desea eliminar (o 0 para volver atrás):")
-
-                if (id == null) {
-                    println("Volviendo al menú...")
-                    return
-                }
-
-                try {
-                    gestorDisciplinas.baja(id)
-                    break // Si se elimina correctamente, salimos del bucle
-                } catch (e: IdInvalidoException) {
-                    println(e.message)
-                    // sigue el bucle y vuelve a pedir
-                }
-            } while (true)
-        }
-
-        private fun buscarDisciplina() {
-        println("Ingrese dato para buscar:")
-        val dato = readLine() ?: return
-
-        val numero = dato.toIntOrNull()
-
-        val resultado = if (numero != null) {
-            gestorDisciplinas.buscarDisciplina(numero)
-        } else if (dato.equals("EQUIPO", ignoreCase = true) || dato.equals("INDIVIDUAL", ignoreCase = true)) {
-            gestorDisciplinas.buscarDisciplina(tipoDisciplina.valueOf(dato.uppercase()))
-        } else {
-            gestorDisciplinas.buscarDisciplina(dato)
-        }
-
-        if (resultado != null) {
-            println("Disciplina encontrada: ${resultado.nombre}, ${resultado.id}")
-        } else {
-            println("No se encontró disciplina.")
-        }
-
-
-    }
         fun getInputIntOrExit(message: String): Int? {
             println(message)
             val input = readLine()
