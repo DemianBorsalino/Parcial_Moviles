@@ -61,21 +61,24 @@
         }
 
         fun menuPrincipal() {
-            println("Bienvenido al sistema de gestion")
-            println("Que desa gestionar?:")
-            println("1. Disciplinas")
-            println("2. Socios")
-            println("3. Pagos")
-            println("4. Inscripciones")
-            println("0. Salir")
+            do {
+                println("Bienvenido al sistema de gestion")
+                println("Que desa gestionar?:")
+                println("1. Disciplinas")
+                println("2. Socios")
+                println("3. Pagos")
+                println("4. Inscripciones")
+                println("0. Salir")
 
-            when (readLine()?.toIntOrNull()) {
-                1 -> menuDisciplinas()
-                /*2 -> menuSocios()
-                3 -> menuPagos()
-                4 -> menuInscrpiciones()*/
-                0 -> println("Adios! Vuelva pronto!")
-                else -> println("Opción inválida")
+
+                when (readLine()?.toIntOrNull()) {
+                    1 -> menuDisciplinas()
+                    /*2 -> menuSocios()
+                    3 -> menuPagos()
+                    4 -> menuInscrpiciones()*/
+                    0 -> println("Adios! Vuelva pronto!")
+                    else -> println("Opción inválida")
+                }
             }
         }
 
