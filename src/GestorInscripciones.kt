@@ -1,5 +1,3 @@
-import Estado
-import Socio
 import java.time.LocalDate
 
 class GestorInscripciones : GeneradorID{
@@ -8,13 +6,13 @@ class GestorInscripciones : GeneradorID{
 
     fun inscribirSocio(socio: Socio, disciplina: Disciplina) {
         if (socio.tieneCuotasImpagas()) {
-            throw Exception("El socio ${socio.nombre} tiene cuotas impagas y no puede inscribirse.")
+            throw CuotasImpagasException("El socio ${socio.nombre} tiene cuotas impagas y no puede inscribirse.")
         }
         if (disciplina.sociosInscriptos.size >= disciplina.capacidadMaxima) {
-            throw Exception("No hay cupo disponible en ${disciplina.nombre}.")
+            throw CupoLlenoException("No hay cupo disponible en ${disciplina.nombre}.")
         }
         if (socio.estaInscriptoActiva(disciplina)) {
-            throw Exception("El socio ya está inscripto activamente en esta disciplina.")
+            throw InscripcionDuplicadaException("El socio ya está inscripto activamente en esta disciplina.")
         }
 
         val nuevaInscripcion = Inscripcion(

@@ -12,13 +12,20 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
 
     override fun baja(id: Int) {
         val d = disciplinas.find { it.id == id }
-        if (d != null && d.sociosInscriptos.isEmpty()) {
-            disciplinas.remove(d)
-            println("Disciplina '${d.nombre}' eliminada.")
-        } else {
-            println("No se ha encontrado la disciplina.")
+
+        if (d == null) {
+            throw IdInvalidoException("No se encontró la disciplina con el ID ingresado.")
         }
+
+        /*if (d.sociosInscriptos.isNotEmpty()) {
+            throw IdInvalidoException("No se puede eliminar: la disciplina '${d.nombre}' tiene socios inscriptos.")
+        }*/
+
+        disciplinas.remove(d)
+        println("Disciplina '${d.nombre}' eliminada exitosamente.")
     }
+
+
 
     fun listarSociosPorDisciplina() {
         disciplinas.forEach { disciplina ->
@@ -27,7 +34,7 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
                 println("  No hay socios inscriptos.")
             } else {
                 disciplina.sociosInscriptos.forEach { socio ->
-                    println("  Socio: ${socio.nombre} (DNI: ${socio.DNI})")
+                    println("  Socio: ${socio.nombre} (DNI: ${socio.DNI}) \n ID: ${socio.id}")
                 }
             }
         }
@@ -74,7 +81,7 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
     }
     fun mostrarDisciplinas() {
         disciplinas.forEach {
-            println("Disciplina: ${it.nombre}, Tipo: ${it.tipo}, Capacidad: ${it.capacidadMaxima}")
+            println("Disciplina: ${it.nombre}, Tipo: ${it.tipo}, Capacidad: ${it.capacidadMaxima}, id:${it.id}")
         }
     }
 
