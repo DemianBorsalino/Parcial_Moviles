@@ -38,6 +38,6 @@ class GestorPagos {
     }
 
     private fun generarId(): Int {
-        return pagos.size + 1
+        return  + 1
     }
 }

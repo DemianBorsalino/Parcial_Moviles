@@ -1,5 +1,6 @@
-class GestorSocios : Gestiones<Socio> {
+class GestorSocios : Gestiones<Socio>, GeneradorID {
     private val socios = mutableListOf<Socio>()
+    private var contameiD = 5;
 
     override fun alta(item: Socio) {
         socios.add(item)
@@ -28,5 +29,10 @@ class GestorSocios : Gestiones<Socio> {
 
     fun buscar(id: Int): Socio? {
         return socios.find { it.id == id }
+    }
+
+    override fun generoID() : Int {
+        contameiD ++
+        return contameiD
     }
 }

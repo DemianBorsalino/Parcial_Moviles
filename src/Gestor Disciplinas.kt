@@ -73,8 +73,9 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
     fun buscarDisciplina(dato: Any): Disciplina? {
         return disciplinas.find {
             when (dato) {
-                is String -> it.nombre.equals(dato, ignoreCase = true) || it.tipo.name.equals(dato, ignoreCase = true)
+                is String -> it.nombre.equals(dato, ignoreCase = true)
                 is Int -> it.capacidadMaxima == dato
+                is tipoDisciplina -> it.tipo == dato
                 else -> false
             }
         }
