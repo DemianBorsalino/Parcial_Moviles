@@ -5,6 +5,16 @@ Demián Borsalino
 Cao Gabino
 Vera Bautista
 
+PARTES NOTABLES DEL PROYECTO:
+1. Uso de excepciones en caso de ingresar mal los datos
+2. Uso de mutableList() para los distintos Gestores para los distintos objetos que contener
+3. Interfaces como generadorID y Gestiones, además de Excepciones que es obligatorio si queremos utilizarlo
+4. Estado y tipoDisciplina son clases enum que nos dan los tipos de resultado que puede tener cierto campo.
+Ademas
+5. Contador para generar IDs. Esto lo llevamos a cabo para se generen de manera única, evitando la repetición
+de un mismo número
+6. Buscador por clase enum
+
 ORGANIZACION DEL TRABAJO:
 El trabajo fue dividido de la siguiente manera:
 1. Creación básica de las clases (sin las funciones especificas)
