@@ -94,7 +94,7 @@
         }
 
         fun menuDisciplinas() {
-            println("Seleccionaste gestion de disciplinas")
+            println("=== Gestión de Disciplinas ===")
             println("Ahora, eliga una opcion:")
             println("1. Agregar disciplina")
             println("2. Eliminar disciplina")
@@ -199,8 +199,23 @@
 
 
         fun menuSocios() {
-            println("Socios man")
+            println("=== Gestión de Socios ===")
+            println("Seleccione una opción:")
+            println("1. Inscribir socio a disciplina")
+            println("2. Eliminar inscripción de socio")
+            println("3. Ver socios inscriptos en una disciplina")
+            println("0. Volver")
+
+            when (readLine()?.toIntOrNull()) {
+                1 -> inscribirSocioADisciplina()
+                2 -> eliminarInscripcion()
+                3 -> verSociosInscriptos()
+                0 -> println("Volviendo al menú principal...")
+                else -> println("Opción inválida")
+            }
         }
+
+
 
         fun menuPagos() {
             println("Seleccionaste gestión de pagos")
