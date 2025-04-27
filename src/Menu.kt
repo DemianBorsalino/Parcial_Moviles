@@ -76,15 +76,7 @@
 
                 when (opcion) {
                     1 -> menuDisciplinas()
-
-
-
-
                     2 -> menuSocios()
-
-
-
-
                     3 -> menuPagos()
                     4 -> menuInscripciones()
                     0 -> println("Adios! Vuelva pronto!")
@@ -201,24 +193,90 @@
         fun menuSocios() {
             println("=== Gestión de Socios ===")
             println("Seleccione una opción:")
-            println("1. Inscribir socio a disciplina")
+            println("1. Inscribir socio")
             println("2. Eliminar inscripción de socio")
-            println("3. Ver socios inscriptos en una disciplina")
+            println("3. Buscar socio por id")
+            println("4. Ver socios inscriptos en una disciplina")
+            println("5. listado de socios")
             println("0. Volver")
 
             when (readLine()?.toIntOrNull()) {
-                1 -> inscribirSocioADisciplina()
-                2 -> eliminarInscripcion()
-                3 -> verSociosInscriptos()
+                1 -> darDeAltaSocio()
+                2 -> darDeBajaSocio()
+                3 -> buscarSocio()
+                4 -> gestorSocios.mostrarMorosos()
+                5 -> gestorSocios.mostrarSocios()
                 0 -> println("Volviendo al menú principal...")
                 else -> println("Opción inválida")
             }
         }
 
+        private fun darDeAltaSocio() {
+            println("Ingrese nombre del socio:")
+            val nombre = readLine() ?: return
+
+            println("Ingrese DNI:")
+            val dni = readLine()?.toIntOrNull() ?: run {
+                println("DNI inválido.")
+                return
+            }
+
+            println("Ingrese email (opcional, presione Enter si no quiere ponerlo):")
+            val emailInput = readLine()
+            val email = if (emailInput.isNullOrBlank()) null else emailInput
+
+            val nuevoSocio = Socio(
+                nombre = nombre,
+                DNI = dni,
+                email = email,
+                id = gestorSocios.generoID()
+            )
+
+            gestorSocios.alta(nuevoSocio)
+        }
+
+        private fun darDeBajaSocio() {
+            println("Ingrese el ID del socio que desea eliminar:")
+            val id = readLine()?.toIntOrNull() ?: run {
+                println("ID inválido.")
+                return
+            }
+
+            val socio = gestorSocios.buscar(id)
+            if (socio != null) {
+                gestorSocios.baja(id)
+            } else {
+                println("No se encontró un socio con ese ID.")
+            }
+        }
+
+        private fun buscarSocio() {
+            println("Ingrese el ID del socio que desea buscar:")
+            val id = readLine()?.toIntOrNull()
+
+            if (id == null) {
+                println("ID inválido. Debe ingresar un número.")
+                return
+            }
+
+            val socio = gestorSocios.buscar(id)
+
+            if (socio != null) {
+                println("\n=== Socio encontrado ===")
+                println("ID: ${socio.id}")
+                println("Nombre: ${socio.nombre}")
+                println("DNI: ${socio.DNI}")
+                println("Email: ${socio.email ?: "No especificado"}")
+                println("Cantidad de inscripciones: ${socio.listaDeInscripciones.size}")
+                println("Cantidad de pagos: ${socio.pagos.size}")
+            } else {
+                println("No se encontró un socio con el ID ingresado.")
+            }
+        }
 
 
         fun menuPagos() {
-            println("Seleccionaste gestión de pagos")
+            println("=== Gestión de Pagos ===")
             println("Ahora, elige una opción:")
             println("1. Registrar nuevo pago")
             println("2. Consultar pagos de un socio")

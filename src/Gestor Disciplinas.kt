@@ -82,7 +82,7 @@ class GestorDisciplinas : Gestiones<Disciplina> , GeneradorID{
     }
     fun mostrarDisciplinas() {
         disciplinas.forEach {
-            println("Disciplina: ${it.nombre}, Tipo: ${it.tipo}, Capacidad: ${it.capacidadMaxima}, id:${it.id}")
+            println("ID:${it.id} ,Disciplina: ${it.nombre}, Tipo: ${it.tipo}, Capacidad: ${it.capacidadMaxima}")
         }
     }
 

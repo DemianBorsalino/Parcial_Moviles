@@ -15,6 +15,18 @@ class GestorSocios : Gestiones<Socio>, GeneradorID {
         }
     }
 
+    fun mostrarSocios() {
+            if (socios.isEmpty()) {
+                println("No hay socios registrados.")
+            } else {
+                println("\n=== Listado de Socios ===")
+                socios.forEach { socio ->
+                    println("ID: ${socio.id} | Nombre: ${socio.nombre} | DNI: ${socio.DNI} | Email: ${socio.email ?: "No especificado"}")
+                }
+            }
+        }
+
+
     fun mostrarMorosos() {
         val morosos = socios.filter { it.tieneCuotasImpagas() }
         if (morosos.isEmpty()) {
